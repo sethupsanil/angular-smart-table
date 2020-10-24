@@ -1,0 +1,6 @@
+
+<select (change)="itemClick($event)" *ngIf="value.option" name="" id="">
+  <option value="{{item.event}}" *ngFor="let item of value.option">
+    {{item.label}}
+  </option>
+</select>

@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let item of tableHeader" [class]="item.value.class" scope="col">
+        {{item.value.title}}
+        <i *ngIf="item.value.icon" [class]="item.value.icon"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let grid of gridData">
+      <td *ngFor="let head of tableHeader" (click)="itemClicked(head,grid[head.key],grid)" [class]="head.value.class" scope="row">
+        <div *ngIf="head.value.type ==='text'">
+          {{head.value.valuePrepareFunction?head.value.valuePrepareFunction(grid[head.key]):grid[head.key] }}
+        </div>
+        <div *ngIf="head.value.type ==='html'" [innerHTML]="grid[head.key]"></div>
+        <app-grid-item [valuePrepareFunction]="head.value.valuePrepareFunction" [columnSetting]="head.value"
+          (customEvent)="OnCustomEvent($event)" [value]="grid[head.key]" [row]="grid"></app-grid-item>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
